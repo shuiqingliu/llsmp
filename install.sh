@@ -5,7 +5,7 @@
 #Github 
 #https://github.com/shuiqingliu/llsmp
 
-#To define the variables in this section
+#To definition the variables in this section
 variables(){
 	#base info
 	software_name="LLsmp"
@@ -14,21 +14,29 @@ variables(){
 
 #Display the help
 usage(){
+	variables
 	echo "$software_name v$software_version"
-	echo "Usage: $0 command [option]"
+	echo "Usage: $0 command"
 	echo ""
 	echo "Commands:"
-	echo "  -i  [llsmp|lamp|lnmp|...] to install some software with this   "
-	echo "                            command eg install.sh -i ionCube     "
+	echo "	llsmp 	to install LiteSpeed+MySQL+PHP on Linux"
+	echo "	lnmp 	to install Nginx+MySQL+PHP on Linux    "
+	echo "	lamp 	to install Apache+MySQL+PHP on Linux   "
+	echo "	oplmp   to install OpenLiteSpeed+MySQL+PHp on Linux "
 
 }
 
 #check the os
 check_os(){
 	case `uname -s` in
-	Darwin) OS="darwin";;
-	Linux)  OS="linux";;
-	*)   error "unkown os : $(uname -m)"
+	Darwin)
+          OS="darwin"
+          ;;
+	Linux)  
+          OS="linux"
+          ;;
+	*)   
+		error "unkown os : $(uname -m)"
 	esac
 }
 
@@ -39,4 +47,6 @@ error(){
 	echo "Error: $msg" 1>&2
 	exit 1
 }
+
+usage
 
