@@ -36,6 +36,9 @@ check_os(){
 	Ubuntu)  
           OS="ubuntu"
           ;;
+	Centos)
+	  OS="centos"
+	  ;;
 	*)   
 		error "unkown os : $(uname -m)"
 	esac
