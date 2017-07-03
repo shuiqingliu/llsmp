@@ -10,6 +10,7 @@ variables(){
 	#base info
 	software_name="LLsmp"
 	software_version="1.0 aphla"
+	debug=true
 }
 
 #Display the help
@@ -38,6 +39,12 @@ check_os(){
 	*)   
 		error "unkown os : $(uname -m)"
 	esac
+}
+
+debug(){
+	info=$1
+	if [[ debug==true  ]]; then
+	    echo "$info" 1>&2	
 }
 
 #echo error message and quit the script
