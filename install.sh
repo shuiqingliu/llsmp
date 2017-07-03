@@ -45,6 +45,7 @@ debug(){
 	info=$1
 	if [[ debug==true  ]]; then
 	    echo "$info" 1>&2	
+	fi
 }
 
 #echo error message and quit the script
