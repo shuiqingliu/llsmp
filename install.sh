@@ -4,7 +4,7 @@
 
 #Github 
 #https://github.com/shuiqingliu/llsmp
-
+#
 #To definition the variables in this section
 variables(){
 	#base info
@@ -28,12 +28,12 @@ usage(){
 
 #check the os
 check_os(){
-	case `uname -s` in
-	Darwin)
-          OS="darwin"
+	case `cat /etc/issue | awk '{print $1}'` in
+	Debian)
+          OS="debian"
           ;;
-	Linux)  
-          OS="linux"
+	Ubuntu)  
+          OS="ubuntu"
           ;;
 	*)   
 		error "unkown os : $(uname -m)"
