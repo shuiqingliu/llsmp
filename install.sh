@@ -44,6 +44,7 @@ check_os(){
     esac
 }
 
+# output debug message
 debug(){
     info=$1
     if [[ debug==true  ]]; then
@@ -59,5 +60,33 @@ error(){
     exit 1
 }
 
-usage
+# start istall 
+start_install(){
+    check_os
+    if [[ OS=="debian" ]];then
+        debian_litespeed
+        debian_php
+        debian_database
+    elif [[ OS=="ubuntu" ]]; then
+        ubuntu_litespeed
+        ubuntu_php
+        ubuntu_database
+    elif [[ OS=="centos" ]];then
+        centos_litespeed
+        centos_php
+        centos_database
+    fi
+}
+
+# decide what action to do
+do_main(){
+
+    variables
+    
+    #Check for validity argument
+    [[ $1 != "llsmp" && $1 != "lamp" && $1 != "lnmp" ]] &&
+        usage
+}
+
+do_main
 
