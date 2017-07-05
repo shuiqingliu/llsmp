@@ -41,6 +41,7 @@ check_os(){
       ;;
     *)   
         error "unkown os : $(uname -m)"
+        exit
     esac
 }
 
@@ -85,7 +86,10 @@ do_main(){
     
     #Check for validity argument
     [[ $1 != "llsmp" && $1 != "lamp" && $1 != "lnmp" ]] &&
-        usage
+        usage && exit
+    [[ $1 == llsmp ]] &&
+        start_install
+    [[ $1 == llsmp ]] &&
 }
 
 do_main
