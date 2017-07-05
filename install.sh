@@ -62,7 +62,7 @@ error(){
 }
 
 # start istall 
-start_install(){
+llsmp_install(){
     check_os
     if [[ OS=="debian" ]];then
         debian_litespeed
@@ -78,6 +78,7 @@ start_install(){
         centos_database
     fi
 }
+#TODO ADD lnmp,lamp install function
 
 # decide what action to do
 do_main(){
@@ -88,8 +89,11 @@ do_main(){
     [[ $1 != "llsmp" && $1 != "lamp" && $1 != "lnmp" ]] &&
         usage && exit
     [[ $1 == llsmp ]] &&
-        start_install
-    [[ $1 == llsmp ]] &&
+        llsmp_install
+    [[ $1 == lnmp ]] &&
+        lnmp_install           
+    [[ $1 == lamp ]] &&
+        lamp_install
 }
 
 do_main
