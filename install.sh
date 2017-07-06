@@ -29,15 +29,15 @@ usage(){
 
 #check the os
 check_os(){
-    case `cat /etc/issue | awk '{print $1}'` in
-    Debian)
+    case `cat /etc/issue | awk '{print $1}' | tr [A-Z] [a-z]` in
+    debian)
           OS="debian"
           ;;
-    Ubuntu)  
+    ubuntu)  
           OS="ubuntu"
           ;;
-    Centos)
-      OS="centos"
+    centos)
+          OS="centos"
       ;;
     *)   
         error "unkown os : $(uname -m)"
