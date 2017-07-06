@@ -84,7 +84,6 @@ llsmp_install(){
 do_main(){
 
     variables
-    echo $1    
     #Check for validity argument
     [[ $1 != "llsmp" && $1 != "lamp" && $1 != "lnmp" ]] &&
         usage && exit
@@ -96,5 +95,5 @@ do_main(){
         lamp_install
 }
 
-do_main
+do_main "$@"
 
