@@ -23,7 +23,6 @@ usage(){
     echo "  llsmp   to install LiteSpeed+MySQL+PHP on Linux"
     echo "  lnmp    to install Nginx+MySQL+PHP on Linux    "
     echo "  lamp    to install Apache+MySQL+PHP on Linux   "
-    echo "  oplmp   to install OpenLiteSpeed+MySQL+PHp on Linux "
 
 }
 
@@ -55,17 +54,20 @@ debug(){
 
 #echo error message and quit the script
 error(){
-    msg=$1
-    echo "******************************************"
-    echo "Error: $msg" 1>&2
+    source ./addons/rainbow.sh  
+    echo "*****************************************************"
+    while [[ "$1" != "" ]]; do
+        echored  "$1" 1>&2
+        shift
+    done
+    echo "*****************************************************"
     exit 1
 }
 
 #check user
 check_user(){
     if [[ $EUID -ne 0 ]]; then
-        error "You must be a root user to run this script\nuse command like \"sudo -i\" and then input your password"
-        exit 1
+        error "ERROR: You must be a root user to run this script" "use command like \"sudo -i\" and then input your password"
     fi
 }
 
@@ -92,10 +94,10 @@ llsmp_install(){
 do_main(){
 
     variables
-    check_user
     #Check for validity argument
     [[ $1 != "llsmp" && $1 != "lamp" && $1 != "lnmp" ]] &&
         usage && exit
+        check_user
     [[ $1 == llsmp ]] &&
         llsmp_install
     [[ $1 == lnmp ]] &&
