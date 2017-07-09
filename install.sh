@@ -57,8 +57,16 @@ debug(){
 error(){
     msg=$1
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    shift
     echo "Error: $msg" 1>&2
     exit 1
+}
+
+#check user
+check_user(){
+    if [[ $EUID -ne 0 ]]; then
+        error "You must be a root user to run this script" "use command like \"sudo -i\" and then input your password"
+        exit 1
 }
 
 # start istall 
@@ -84,6 +92,7 @@ llsmp_install(){
 do_main(){
 
     variables
+    check_user
     #Check for validity argument
     [[ $1 != "llsmp" && $1 != "lamp" && $1 != "lnmp" ]] &&
         usage && exit
