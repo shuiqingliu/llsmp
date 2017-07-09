@@ -56,8 +56,7 @@ debug(){
 #echo error message and quit the script
 error(){
     msg=$1
-    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    shift
+    echo "******************************************"
     echo "Error: $msg" 1>&2
     exit 1
 }
@@ -65,8 +64,9 @@ error(){
 #check user
 check_user(){
     if [[ $EUID -ne 0 ]]; then
-        error "You must be a root user to run this script" "use command like \"sudo -i\" and then input your password"
+        error "You must be a root user to run this script\nuse command like \"sudo -i\" and then input your password"
         exit 1
+    fi
 }
 
 # start istall 
