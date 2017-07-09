@@ -11,6 +11,13 @@ variables(){
     software_name="LLsmp"
     software_version="1.0 aphla"
     debug=true
+    ADMINPASS=
+    ROOTPASS=
+    DATABASEPASS=
+    DATABASENAME=
+    USERNAME=
+    SERVER_DIR=/usr/local/llsmp
+    TEMPPASS=
 }
 
 #Display the help
@@ -71,6 +78,11 @@ check_user(){
     fi
 }
 
+#generate password
+generate_pass(){
+    variables
+    TEMPPASS=`dd if=/dev/urandom bs=1 count=32 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev`    
+}
 # start istall 
 llsmp_install(){
     check_os
@@ -92,7 +104,9 @@ llsmp_install(){
 
 # decide what action to do
 do_main(){
-
+    #generate password
+    generate_pass
+    #reload variables
     variables
     #Check for validity argument
     [[ $1 != "llsmp" && $1 != "lamp" && $1 != "lnmp" ]] &&
