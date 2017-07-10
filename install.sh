@@ -94,6 +94,7 @@ generate_pass(){
 # start istall 
 llsmp_install(){
     check_os
+    variables
     if [[ OS=="debian" ]];then
         debian_litespeed
         debian_php
