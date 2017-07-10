@@ -6,13 +6,14 @@ source ./addons/rainbow.sh
 #Github 
 #https://github.com/shuiqingliu/llsmp
 #
+
+#SET GLOBLE VARIABLE
 #To definition the variables in this section
 variables(){
     #base info
     software_name="LLsmp"
     software_version="1.0 aphla"
     debug=true
-    OS=
     ADMINPASS=
     ROOTPASS=
     DATABASEPASS=
@@ -98,15 +99,15 @@ generate_pass(){
 llsmp_install(){
     check_os
     variables
-    if [[ OS=="debian" ]];then
+    if [[ $OS == "debian" ]];then
         debian_litespeed
         debian_php
         debian_database
-    elif [[ OS=="ubuntu" ]]; then
+    elif [[ $OS == "ubuntu" ]]; then
         ubuntu_litespeed
         ubuntu_php
         ubuntu_database
-    elif [[ OS=="centos" ]];then
+    elif [[ $OS == "centos" ]];then
         centos_litespeed
         centos_php
         centos_database
