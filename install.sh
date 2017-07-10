@@ -11,6 +11,7 @@ variables(){
     software_name="LLsmp"
     software_version="1.0 aphla"
     debug=true
+    OS=
     ADMINPASS=
     ROOTPASS=
     DATABASEPASS=
@@ -35,20 +36,27 @@ usage(){
 
 #check the os
 check_os(){
-    case `cat /etc/issue | awk '{print $1}' | tr [A-Z] [a-z]` in
-    debian)
-          OS="debian"
-          ;;
-    ubuntu)  
-          OS="ubuntu"
-          ;;
-    centos)
-          OS="centos"
-      ;;
-    *)   
-        error "unkown os : $(uname -m)"
-        exit
-    esac
+    if [[ -f /etc/redhat-release ]] ; then
+        ostemp=`cat /etc/redhat-release | awk '{print $1}' | tr [A-Z] [a-z]`
+        if [[ "x$ostemp"=="xcentos" ]]; then
+                OS="centos"
+        else 
+                error "unkown os : $(uname -m)"
+                exit
+        fi
+    elif [[ -f /etc/lsb_release ]]; then
+        case `cat /etc/issue | awk '{print $1}' | tr [A-Z] [a-z]` in
+            debian)
+                OS="debian"
+                ;;
+            ubuntu)  
+                OS="ubuntu"
+                ;;
+            *)   
+                error "unkown os : $(uname -m)"
+                exit
+        esac
+    fi
 }
 
 # output debug message
