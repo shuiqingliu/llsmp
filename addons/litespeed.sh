@@ -31,9 +31,13 @@ check_version(){
 }
 
 centos_litespeed(){
-
-    check_verson
-    if [[ $ACTION == "install" ]]; then
     
+    check_verson
+    #install hashlib
+    yum -y install python-hashlib
+    yum -y $ACTION epel-release
+    rpm -Uvh http://rpms.litespeedtech.com/centos/litespeed-repo-1.1-1.el$OS_VERSION.noarch.rpm 
+    yum -y $ACTION openlitespeed
+
 }
 
