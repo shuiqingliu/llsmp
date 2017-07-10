@@ -2,6 +2,7 @@
 
 #TODO add llsmp information
 
+source ./addons/rainbow.sh 
 #Github 
 #https://github.com/shuiqingliu/llsmp
 #
