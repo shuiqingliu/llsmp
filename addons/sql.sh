@@ -17,9 +17,17 @@ centos_sql(){
         yum -y $ACTION lsphp$PHPVER-mysql$ND
 
     elif [[ "x$MariaDB" == "x1" ]]; then
-       
+        cat >> /etc/yum.repos.d/MariaDB.repo <<END
+# MariaDB 10.2 CentOS repository list - created 2017-07-25 08:18 UTC
+# http://downloads.mariadb.org/mariadb/repositories/
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.2/centos$OSVER-$OSTYPE
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
 
-
+END
+        yum -y install MariaDB-server MariDB-client
     elif [[ "x$sqlite" == "x1" ]]; then
 
     fi
