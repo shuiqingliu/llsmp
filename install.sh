@@ -30,7 +30,8 @@ change_sshPort(){
     if [[ "$PORT" =~ ^[0-9]+$ ]];then
         if [ "$REPLY" -ge 0 -a "$REPLY" -le 65535 ]; then 
             PORT=$PORT
-            sed -i  's/^#\s*Port/#&/' /etc/ssh/sshd_config 
+            sed -i  's/^#\s*Port/#&/g' /etc/ssh/sshd_config 
+            sed -i  's/^Port/#&/g' /etc/ssh/sshd_config 
             echo "Port $PORT" >> /etc/ssh/sshd_config
             break
         else
@@ -40,7 +41,7 @@ change_sshPort(){
         break
     fi
     done
-}
+/^#\s*Port/#&/
 #Display the help
 usage(){
     variables
