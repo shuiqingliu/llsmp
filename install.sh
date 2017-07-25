@@ -20,9 +20,27 @@ variables(){
     DATABASENAME=
     USERNAME=
     SERVER_DIR=/usr/local/llsmp
+    PORT=
     TEMPPASS=
 }
 
+change_sshPort(){
+    while true; do
+    read -p "Please Reset SSH Port(Default:22 Press Enter)" PORT
+    if [[ "$PORT" =~ ^[0-9]+$ ]];then
+        if [ "$REPLY" -ge 0 -a "$REPLY" -le 65535 ]; then 
+            PORT=$PORT
+            sed -i  's/^#\s*Port/#&/' /etc/ssh/sshd_config 
+            echo "Port $PORT" >> /etc/ssh/sshd_config
+            break
+        else
+           echored "Please input corrent port number[range:0-65535]"
+        fi
+    elif [[ "x$PORT" == "x" ]];then
+        break
+    fi
+    done
+}
 #Display the help
 usage(){
     variables
