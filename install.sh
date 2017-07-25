@@ -22,6 +22,10 @@ variables(){
     SERVER_DIR=/usr/local/llsmp
     PORT=
     TEMPPASS=
+    mysql=
+    MariaDB=
+    SQLite=
+    PHPVER=
 }
 
 change_sshPort(){
@@ -52,6 +56,40 @@ confirm_install(){
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
+    done
+}
+
+select_php(){
+    
+}
+
+select_sql(){
+    cat  << EOF
+Please select a Version of Database Server:
+    1.Install MySQL-5.7
+    2.Install MySQL-5.6
+    3.Install MySQL-5.5,
+    4.Install MariaDB-10.1
+    5.Install MariaDB-10.0
+    6.Install MariaDB-5.5
+    7.Install SQLite
+    8.Not Install Database
+EOF
+    while true;do
+    read -p "Enter your choice number(Default 3Pree Enter):" sql
+    case $sql in
+        #TODO deal sql ........    
+        1) PHPVER=;;
+        2) ;;
+        3) ;;
+        4) ;;
+        5) ;;
+        6) ;;
+        7) ;;
+        8) ;;
+        *) echo "Please input the correct number";;
+    esac
+    done
 }
 
 #Display the help
