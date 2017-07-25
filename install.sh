@@ -41,7 +41,19 @@ change_sshPort(){
         break
     fi
     done
-/^#\s*Port/#&/
+}
+
+confirm_install(){
+    
+    while true; do
+    read -p "Do you want to Install LLsmp ?[y/n]" yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+}
+
 #Display the help
 usage(){
     variables
