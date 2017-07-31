@@ -2,8 +2,15 @@
 
 #TODO add llsmp information
 
-source ./addons/rainbow.sh 
+#includ addons file
+my_dir="$(dirname "$0")"
+$my_dir
+source $my_dir/addons/rainbow.sh 
+source $my_dir/addons/litespeed.sh
+source $my_dir/addons/php.sh
+source $my_dir/addons/sql.sh
 #Github 
+
 #https://github.com/shuiqingliu/llsmp
 #
 
