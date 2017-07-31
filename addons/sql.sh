@@ -23,6 +23,7 @@ centos_sql(){
         yum -y install mysql-community-server
 
     elif [[ "x$MariaDB" == "x1" ]]; then
+        if  [[ "x$MariaDB_ver" == "x102" ]]; then 
         cat >> /etc/yum.repos.d/MariaDB.repo <<END
 # MariaDB 10.2 CentOS repository list - created 2017-07-25 08:18 UTC
 # http://downloads.mariadb.org/mariadb/repositories/
@@ -33,9 +34,35 @@ gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
 gpgcheck=1
 
 END
+        elif  [[ "x$MariaDB_ver" == "x101" ]]; then 
+                
+        cat >> /etc/yum.repos.d/MariaDB.repo <<END
+# MariaDB 10.1 CentOS repository list - created 2017-07-25 08:18 UTC
+# http://downloads.mariadb.org/mariadb/repositories/
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.1/centos$OSVER-$OSTYPE
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+
+END
+
+        elif  [[ "x$MariaDB_ver" == "x55" ]]; then 
+                
+        cat >> /etc/yum.repos.d/MariaDB.repo <<END
+# MariaDB 5.5 CentOS repository list - created 2017-07-25 08:18 UTC
+# http://downloads.mariadb.org/mariadb/repositories/
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/5.5/centos$OSVER-$OSTYPE
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+
+END
+       fi
         yum -y install MariaDB-server MariDB-client
     elif [[ "x$sqlite" == "x1" ]]; then
-
+        yum -y install sqlite
     fi
 
 
