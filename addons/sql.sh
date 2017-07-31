@@ -3,18 +3,20 @@
 #centos sql install
 
 centos_sql(){
-
+    
     check_version    
+    yum -y install yum-utils
     if [[ "x$mysql" == "x1" ]]; then
-        local ND=    
-        if [[ "x$PHPVER" == "x70" || "x$PHPVER" == "x71" ]]; then
-            ND=nd
-            if [[ "x$OSVER" == "x5" ]]; then
-                rpm -Uvh http://repo.mysql.com/mysql-community-release-el5.rpm
-            fi
-        fi
-        
-        yum -y $ACTION lsphp$PHPVER-mysql$ND
+        #download mysql yum repository
+        wget --no-check-certificate https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+
+        #install and setting repository 
+        rpm -Uvh mysql57-community-release-el7-11.noarch.rpm
+        yum-config-manager --disable mysql57-community
+        yum-config-manager --enable mysql56-community 
+
+        #install mysql 
+        yum -y install mysql-community-server
 
     elif [[ "x$MariaDB" == "x1" ]]; then
         cat >> /etc/yum.repos.d/MariaDB.repo <<END
