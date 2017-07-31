@@ -12,9 +12,13 @@ centos_sql(){
 
         #install and setting repository 
         rpm -Uvh mysql57-community-release-el7-11.noarch.rpm
-        yum-config-manager --disable mysql57-community
-        yum-config-manager --enable mysql56-community 
-
+        if [[ "x$mysql_ver" == "x56" ]];then
+             yum-config-manager --disable mysql57-community
+             yum-config-manager --enable mysql56-community 
+        elif [[ "x$mysql_ver" == "x55" ]];then 
+             yum-config-manager --disable mysql57-community
+             yum-config-manager --enable mysql55-community 
+        fi
         #install mysql 
         yum -y install mysql-community-server
 
