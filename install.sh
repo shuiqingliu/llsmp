@@ -24,7 +24,7 @@ variables(){
     TEMPPASS=
     mysql=
     MariaDB=
-    SQLite=
+    sqlite=
     PHPVER=
 }
 
@@ -60,7 +60,27 @@ confirm_install(){
 }
 
 select_php(){
-    
+    cat  << EOF
+    Please select a version of the PHP：
+    1.    Install php-5.3
+    2.    Install php-5.4
+    3.    Install php-5.5
+    4.    Install php-5.6
+    5.    Install php-7.0 
+    6.    Install php-7.1
+EOF
+    while true;do
+    read -p "Enter your choice number(Default 4 Pree Enter):" php
+    case $php in
+        1) $PHPVER=53;;
+        2) $PHPVER=54;;
+        3) $PHPVER=55;;
+        4) $PHPVER=56;;
+        5) $PHPVER=70;;
+        6) $PHPVER=71;;
+        *) echo "Please input the correct number";;
+    esac
+    done
 }
 
 select_sql(){
@@ -69,8 +89,8 @@ Please select a Version of Database Server:
     1.Install MySQL-5.7
     2.Install MySQL-5.6
     3.Install MySQL-5.5,
-    4.Install MariaDB-10.1
-    5.Install MariaDB-10.0
+    4.Install MariaDB-10.2
+    5.Install MariaDB-10.1
     6.Install MariaDB-5.5
     7.Install SQLite
     8.Not Install Database
@@ -78,15 +98,20 @@ EOF
     while true;do
     read -p "Enter your choice number(Default 3Pree Enter):" sql
     case $sql in
-        #TODO deal sql ........    
-        1) PHPVER=;;
-        2) ;;
-        3) ;;
-        4) ;;
-        5) ;;
-        6) ;;
-        7) ;;
-        8) ;;
+        1) $mysql=1
+           $mysql_ver=57;;
+        2) $mysql=1
+           $mysql_ver=56;;
+        3) $mysql=1
+           $mysql_ver=55;;
+        4) $MariaDB=1
+           $MariaDB_ver=102;;
+        5) $MariaDB=1
+           $MariaDB_ver=101;;
+        6) $MariaDB=1
+           $MariaDB_ver=55;;
+        7) $sqlite=1;;
+        8) break;;
         *) echo "Please input the correct number";;
     esac
     done
