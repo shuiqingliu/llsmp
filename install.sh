@@ -33,6 +33,7 @@ variables(){
     MariaDB=
     sqlite=
     PHPVER=
+    OS_VERSION=
 }
 
 change_sshPort(){
@@ -141,6 +142,23 @@ usage(){
 check_os(){
     if [[ -f /etc/redhat-release ]] ; then
         ostemp=`cat /etc/redhat-release | awk '{print $1}' | tr [A-Z] [a-z]`
+        local VER_TEMP=`cat /etc/redhat-release | awk '{print $3}'`
+        cat /etc/redhat-release | awk '{print $3}' | grep "6." >
+        /dev/null
+        if [[ $? == 0 ]];then
+                OS_VERSION=6
+        elif
+            cat /etc/redhat-release | awk '{print $3}' | grep "7." >
+            /dev/null
+            if [[ $? == 0 ]];then
+               OS_VERSION=7
+            else
+               echored "We are not support your system version
+               $VER_TEMP at present"
+               exit
+            fi
+        fi
+
         if [[ "x$ostemp"=="xcentos" ]]; then
                 OS="centos"
         else 
@@ -211,6 +229,7 @@ llsmp_install(){
       #  ubuntu_php
       #  ubuntu_database
        echored "we are not support the ubuntu distribution at present"    
+       exit 
     elif [[ $OS == "centos" ]];then
         centos_litespeed
         centos_php
