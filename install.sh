@@ -132,8 +132,8 @@ usage(){
     echo ""
     echo "Commands:"
     echo "  llsmp   to install LiteSpeed+MySQL+PHP on Linux"
-    echo "  lnmp    to install Nginx+MySQL+PHP on Linux    "
-    echo "  lamp    to install Apache+MySQL+PHP on Linux   "
+  #  echo "  lnmp    to install Nginx+MySQL+PHP on Linux    "
+  #  echo "  lamp    to install Apache+MySQL+PHP on Linux   "
 
 }
 
@@ -201,13 +201,16 @@ llsmp_install(){
     check_os
     variables
     if [[ $OS == "debian" ]];then
-        debian_litespeed
-        debian_php
-        debian_database
+       # debian_litespeed
+       # debian_php
+       # debian_database
+       echored "we are not support the debian distribution at present"    
+       exit 
     elif [[ $OS == "ubuntu" ]]; then
-        ubuntu_litespeed
-        ubuntu_php
-        ubuntu_database
+      #  ubuntu_litespeed
+      #  ubuntu_php
+      #  ubuntu_database
+       echored "we are not support the ubuntu distribution at present"    
     elif [[ $OS == "centos" ]];then
         centos_litespeed
         centos_php
@@ -220,18 +223,20 @@ llsmp_install(){
 do_main(){
     #generate password
     generate_pass
+    check_user
     #reload variables
     variables
     #Check for validity argument
     [[ $1 != "llsmp" && $1 != "lamp" && $1 != "lnmp" ]] &&
         usage && exit
-        check_user
     [[ $1 == llsmp ]] &&
         llsmp_install
     [[ $1 == lnmp ]] &&
-        lnmp_install           
+       # lnmp_install  
+       echored "we are not support the lnmp at present"    
     [[ $1 == lamp ]] &&
-        lamp_install
+        #lamp_install
+       echored "we are not support the lamp at present"    
 }
 
 do_main "$@"
