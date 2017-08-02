@@ -84,7 +84,7 @@ EOF
         1) $PHPVER=53;;
         2) $PHPVER=54;;
         3) $PHPVER=55;;
-        4) $PHPVER=56;;
+        0|4) $PHPVER=56;;
         5) $PHPVER=70;;
         6) $PHPVER=71;;
         *) echo "Please input the correct number";;
@@ -111,7 +111,7 @@ EOF
            $mysql_ver=57;;
         2) $mysql=1
            $mysql_ver=56;;
-        3) $mysql=1
+        0|3) $mysql=1
            $mysql_ver=55;;
         4) $MariaDB=1
            $MariaDB_ver=102;;
@@ -215,6 +215,30 @@ generate_pass(){
     variables
     TEMPPASS=`dd if=/dev/urandom bs=1 count=32 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev`    
 }
+
+set_mysql(){
+    while true; do
+    read -p "Please Set the root password of database :" DBPASS 
+    if [[ "x$DBPASS" != "x" ]];then
+        DATABASEPASS=$DBPASS
+        break
+    elif [[ $DBPASS == 0 ]];then
+        generate_pass
+        DATABASEPASS=$TEMPPASS
+        break
+    elif [[ ${#DBPASS} -le 8 ]];then
+        echored "The minimum password length of 8 character"
+    fi
+    done
+    echo "Your database　password is $DATABASEPASS" >> $SERVER_DIR/password
+    if [[ "x$mysql" == "x1" | "x$MariaDB" == "x1" ]];then 
+          #start mysql    
+          service mysql start
+          #set mysql password
+          mysqladmin -uroot password $TEMPPASS
+    elif [[ "x$sqlite" == "x1" ]];then
+          #start sqlite fi
+}
 # start istall 
 llsmp_install(){
     check_os
@@ -254,9 +278,11 @@ do_main(){
     [[ $1 == lnmp ]] &&
        # lnmp_install  
        echored "we are not support the lnmp at present"    
+       exit
     [[ $1 == lamp ]] &&
         #lamp_install
        echored "we are not support the lamp at present"    
+       exit
 }
 
 do_main "$@"
