@@ -2,7 +2,7 @@
 
 #centos sql install
 
-centos_sql(){
+centos_database(){
     
     check_version    
     yum -y install yum-utils
