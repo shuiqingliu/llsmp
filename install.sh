@@ -34,6 +34,7 @@ variables(){
     sqlite=
     PHPVER=
     OS_VERSION=
+    OS_TYPE=`uname -m`
 }
 
 change_sshPort(){
