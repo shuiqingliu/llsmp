@@ -236,9 +236,41 @@ set_mysql(){
           service mysql start
           #set mysql password
           mysqladmin -uroot password $TEMPPASS
-    elif [[ "x$sqlite" == "x1" ]];then
+    #elif [[ "x$sqlite" == "x1" ]];then
           #start sqlite fi
+    fi
 }
+
+set_litespeed(){
+    
+    #set password 
+    read -p "Please Set LiteSpeed Administrator
+    password(Default：llsmp.cn)" ADMINPASS
+    if [[ $ADMINPASS==0 ]];then
+         generate_pass
+         ADMINPASS=$TEMPPASS
+    else
+        ADMINPASS=$ADMINPASS
+    fi
+    #set email
+    while true; do
+    read -p "Please Set LiteSpeed Administrator
+    Email(Default：admin@localhost.com)" EMAIL
+    case $EMAIL in
+        0)
+               EMAIL=admin@localhost.com
+                break;;
+        *@* ) 
+                EMAIL=$EMAIL
+                break;;
+        * ) echored "Please intput right email address.";;
+    esac
+    done
+    sed -i -e "s/adminEmails/adminEmails $EMAIL\n#adminEmails/"
+    "$SERVER_DIR/conf/httpd_config.conf"        
+    
+}
+
 # start istall 
 llsmp_install(){
     check_os
