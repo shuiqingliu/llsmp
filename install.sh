@@ -306,8 +306,8 @@ do_main(){
     [[ $1 != "llsmp" && $1 != "lamp" && $1 != "lnmp" ]] &&
         usage && exit
     [[ $1 == llsmp ]] &&
-        llsmp_install
         confirm_install
+        llsmp_install
     [[ $1 == lnmp ]] &&
        # lnmp_install  
        echored "we are not support the lnmp at present"    
