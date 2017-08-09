@@ -302,12 +302,6 @@ do_main(){
     variables
     #confirm install
     confirm_install
-    #set litespeed
-    set_litespeed
-    #select php
-    select_php
-    #select sql
-    select_sql
 
     #Check for validity argument
     [[ $1 != "llsmp" && $1 != "lamp" && $1 != "lnmp" ]] &&
@@ -322,6 +316,13 @@ do_main(){
         #lamp_install
        echored "we are not support the lamp at present"    
        exit
+    #set litespeed
+    set_litespeed
+    #select php
+    select_php
+    #select sql
+    select_sql
+
 }
 
 do_main "$@"
