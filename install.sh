@@ -147,7 +147,7 @@ check_os(){
         cat /etc/redhat-release | awk '{print $3}' | grep "6.">/dev/null
         if [[ $? == 0 ]];then
                 OS_VERSION=6
-        elif
+        else
             cat /etc/redhat-release | awk '{print $3}' | grep "7.">/dev/null
             if [[ $? == 0 ]];then
                OS_VERSION=7
