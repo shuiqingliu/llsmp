@@ -304,6 +304,15 @@ do_main(){
     check_user
     #reload variables
     variables
+    #confirm install
+    confirm_install
+    #set litespeed
+    set_litespeed
+    #select php
+    select_php
+    #select sql
+    select_sql
+
     #Check for validity argument
     [[ $1 != "llsmp" && $1 != "lamp" && $1 != "lnmp" ]] &&
         usage && exit
