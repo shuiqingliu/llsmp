@@ -252,6 +252,7 @@ set_litespeed(){
     else
         ADMINPASS=$ADMINPASS
     fi
+    echo "Your litespeed admin　password is $ADMINPASS" >> $SERVER_DIR/password
     #set email
     while true; do
     read -p "Please Set LiteSpeed Administrator
@@ -268,7 +269,8 @@ set_litespeed(){
     done
     sed -i -e "s/adminEmails/adminEmails $EMAIL\n#adminEmails/"
     "$SERVER_DIR/conf/httpd_config.conf"        
-    
+
+    echo "Your litespeed email is $EMAIL" >> $SERVER_DIR/password
 }
 
 # start istall 
