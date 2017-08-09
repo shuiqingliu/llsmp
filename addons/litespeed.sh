@@ -32,8 +32,7 @@ check_version(){
 }
 
 centos_litespeed(){
-    
-    check_verson
+    check_version 
     #install hashlib
     yum -y install python-hashlib
     yum -y $ACTION epel-release
@@ -45,7 +44,7 @@ centos_litespeed(){
 
 debian_litespeed(){
     
-    check_verson
+    check_version
     if [[ $ACTION == "reinstall" ]]; then
         $ACTION="--reinstall"
     elif [[ $ACTION == "update" ]]; then
