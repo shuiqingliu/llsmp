@@ -229,7 +229,7 @@ set_mysql(){
     fi
     done
     echo "Your database　password is $DATABASEPASS" >> $SERVER_DIR/password
-    if [[ "x$mysql" == "x1" | "x$MariaDB" == "x1" ]];then 
+    if [[ "x$mysql" == "x1" || "x$MariaDB" == "x1" ]];then 
           #start mysql    
           service mysql start
           #set mysql password
