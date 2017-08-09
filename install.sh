@@ -148,8 +148,7 @@ check_os(){
         if [[ $? == 0 ]];then
                 OS_VERSION=6
         elif
-            cat /etc/redhat-release | awk '{print $3}' | grep "7." >
-            /dev/null
+            cat /etc/redhat-release | awk '{print $3}' | grep "7.">/dev/null
             if [[ $? == 0 ]];then
                OS_VERSION=7
             else
@@ -254,8 +253,7 @@ set_litespeed(){
     echo "Your litespeed admin　password is $ADMINPASS" >> $SERVER_DIR/password
     #set email
     while true; do
-    read -p "Please Set LiteSpeed Administrator
-    Email(Default：admin@localhost.com)" EMAIL
+    read -p "Please Set LiteSpeed Administrator Email(Default：admin@localhost.com)" EMAIL
     case $EMAIL in
         0)
                EMAIL=admin@localhost.com
@@ -266,8 +264,7 @@ set_litespeed(){
         * ) echored "Please intput right email address.";;
     esac
     done
-    sed -i -e "s/adminEmails/adminEmails $EMAIL\n#adminEmails/"
-    "$SERVER_DIR/conf/httpd_config.conf"        
+    sed -i -e "s/adminEmails/adminEmails $EMAIL\n#adminEmails/" "$SERVER_DIR/conf/httpd_config.conf"        
 
     echo "Your litespeed email is $EMAIL" >> $SERVER_DIR/password
 }
