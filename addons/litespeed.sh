@@ -1,6 +1,6 @@
 #!/bin/bash
 
-local VERSION
+VERSION=
 
 check_version(){
  
@@ -19,6 +19,7 @@ check_version(){
                   [Nn]* ) exit;;
                   * ) echo "Please answer yes or no.";;
               esac
+              done
         else
             #TODO:upgrade
             ACTION=update    
