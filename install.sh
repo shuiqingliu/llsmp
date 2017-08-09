@@ -4,7 +4,7 @@
 
 #includ addons file
 my_dir="$(dirname "$0")"
-$my_dir
+echo $my_dir
 source $my_dir/addons/rainbow.sh 
 source $my_dir/addons/litespeed.sh
 source $my_dir/addons/php.sh
@@ -144,8 +144,7 @@ check_os(){
     if [[ -f /etc/redhat-release ]] ; then
         ostemp=`cat /etc/redhat-release | awk '{print $1}' | tr [A-Z] [a-z]`
         local VER_TEMP=`cat /etc/redhat-release | awk '{print $3}'`
-        cat /etc/redhat-release | awk '{print $3}' | grep "6." >
-        /dev/null
+        cat /etc/redhat-release | awk '{print $3}' | grep "6.">/dev/null
         if [[ $? == 0 ]];then
                 OS_VERSION=6
         elif
