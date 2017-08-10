@@ -152,8 +152,7 @@ check_os(){
             if [[ $? == 0 ]];then
                OS_VERSION=7
             else
-               echored "We are not support your system version
-               $VER_TEMP at present"
+               echored "We are not support your system version $VER_TEMP at present"
                exit
             fi
         fi
@@ -250,7 +249,7 @@ set_litespeed(){
     else
         ADMINPASS=$ADMINPASS
     fi
-    echo "Your litespeed admin　password is $ADMINPASS" >> $SERVER_DIR/password
+    echo "Your litespeed admin　password is $ADMINPASS" > $SERVER_DIR/password
     #set email
     while true; do
     read -p "Please Set LiteSpeed Administrator Email(Default：admin@localhost.com)" EMAIL
@@ -271,8 +270,8 @@ set_litespeed(){
 
 # start istall 
 llsmp_install(){
-    check_os
     variables
+    check_os
     if [[ $OS == "debian" ]];then
        # debian_litespeed
        # debian_php
