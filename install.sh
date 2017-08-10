@@ -81,12 +81,18 @@ EOF
     while true;do
     read -p "Enter your choice number(Default 4 Pree Enter):" php
     case $php in
-        1) $PHPVER=53;;
-        2) $PHPVER=54;;
-        3) $PHPVER=55;;
-        ""|4) $PHPVER=56;;
-        5) $PHPVER=70;;
-        6) $PHPVER=71;;
+        1) $PHPVER=53
+            break;;
+        2) $PHPVER=54
+            break;;
+        3) $PHPVER=55
+            break;;
+        4|"") $PHPVER=56
+            break;;
+        5) $PHPVER=70
+            break;;
+        6) $PHPVER=71
+            break;;
         *) echo "Please input the correct number";;
     esac
     done
@@ -108,18 +114,25 @@ EOF
     read -p "Enter your choice number(Default 3Pree Enter):" sql
     case $sql in
         1) $mysql=1
-           $mysql_ver=57;;
+           $mysql_ver=57
+            break;;
         2) $mysql=1
-           $mysql_ver=56;;
+           $mysql_ver=56
+            break;;
         ""|3) $mysql=1
-           $mysql_ver=55;;
+           $mysql_ver=55
+            break;;
         4) $MariaDB=1
-           $MariaDB_ver=102;;
+           $MariaDB_ver=102
+            break;;
         5) $MariaDB=1
-           $MariaDB_ver=101;;
+           $MariaDB_ver=101
+            break;;
         6) $MariaDB=1
-           $MariaDB_ver=55;;
-        7) $sqlite=1;;
+           $MariaDB_ver=55
+            break;;
+        7) $sqlite=1
+            break;;
         8) break;;
         *) echo "Please input the correct number";;
     esac
