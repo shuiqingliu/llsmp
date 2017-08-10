@@ -84,7 +84,7 @@ EOF
         1) $PHPVER=53;;
         2) $PHPVER=54;;
         3) $PHPVER=55;;
-        0|4) $PHPVER=56;;
+        ""|4) $PHPVER=56;;
         5) $PHPVER=70;;
         6) $PHPVER=71;;
         *) echo "Please input the correct number";;
@@ -111,7 +111,7 @@ EOF
            $mysql_ver=57;;
         2) $mysql=1
            $mysql_ver=56;;
-        0|3) $mysql=1
+        ""|3) $mysql=1
            $mysql_ver=55;;
         4) $MariaDB=1
            $MariaDB_ver=102;;
@@ -243,7 +243,7 @@ set_litespeed(){
     #set password 
     read -p "Please Set LiteSpeed Administrator
     password(Default：llsmp.cn)" ADMINPASS
-    if [[ $ADMINPASS==0 ]];then
+    if [[ $ADMINPASS!="" ]];then
          generate_pass
          ADMINPASS=$TEMPPASS
     else
@@ -254,7 +254,7 @@ set_litespeed(){
     while true; do
     read -p "Please Set LiteSpeed Administrator Email(Default：admin@localhost.com)" EMAIL
     case $EMAIL in
-        0)
+        "")
                EMAIL=admin@localhost.com
                 break;;
         *@* ) 
