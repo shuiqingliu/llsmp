@@ -12,8 +12,7 @@ centos_php(){
     lsphp$PHPVER-mcrypt lsphp$PHPVER-pdo lsphp$PHPVER-imap
 
     #add soft link
-    ln -sf $SERVER_DIR/lsphp$PHPVER/bin/lsphp
-    $SERVER_DIR/fcgi-bin/lsphp5
+    ln -sf $SERVER_DIR/lsphp$PHPVER/bin/lsphp $SERVER_DIR/fcgi-bin/lsphp5
 }
 
 debian_php(){
