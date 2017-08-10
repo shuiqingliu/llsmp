@@ -299,15 +299,15 @@ do_main(){
     check_user
     #reload variables
     variables
-    #select php
-    select_php
-    #select sql
-    select_sql
     #Check for validity argument
     [[ $1 != "llsmp" && $1 != "lamp" && $1 != "lnmp" ]] &&
         usage && exit
     [[ $1 == llsmp ]] &&
         confirm_install
+        #select php
+        select_php
+        #select sql
+        select_sql
         llsmp_install
     [[ $1 == lnmp ]] &&
        # lnmp_install  
