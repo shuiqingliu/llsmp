@@ -4,7 +4,6 @@
 
 #includ addons file
 my_dir="$(dirname "$0")"
-echo $my_dir
 source $my_dir/addons/rainbow.sh 
 source $my_dir/addons/litespeed.sh
 source $my_dir/addons/php.sh
@@ -26,7 +25,7 @@ variables(){
     DATABASEPASS=
     DATABASENAME=
     USERNAME=
-    SERVER_DIR=/usr/local/llsmp
+    SERVER_DIR=/usr/local/lsws
     PORT=
     TEMPPASS=
     mysql=
@@ -254,9 +253,8 @@ set_mysql(){
 set_litespeed(){
     
     #set password 
-    read -p "Please Set LiteSpeed Administrator
-    password(Default：llsmp.cn)" ADMINPASS
-    if [[ $ADMINPASS!="" ]];then
+    read -p "Please Set LiteSpeed Administrator password(Default：llsmp.cn):" ADMINPASS
+    if [[ $ADMINPASS != "" ]];then
          generate_pass
          ADMINPASS=$TEMPPASS
     else
@@ -265,7 +263,7 @@ set_litespeed(){
     echo "Your litespeed admin　password is $ADMINPASS" > $SERVER_DIR/password
     #set email
     while true; do
-    read -p "Please Set LiteSpeed Administrator Email(Default：admin@localhost.com)" EMAIL
+    read -p "Please Set LiteSpeed Administrator Email(Default：admin@localhost.com):" EMAIL
     case $EMAIL in
         "")
                EMAIL=admin@localhost.com
