@@ -305,6 +305,10 @@ llsmp_install(){
         variables
         select_sql
         centos_database
+        #set litespeed
+        set_litespeed
+        #set sql
+        set_mysql
     fi
 }
 #TODO ADD lnmp,lamp install function
@@ -331,10 +335,6 @@ do_main(){
         #lamp_install
        echored "we are not support the lamp at present"    
        exit
-    #set litespeed
-    set_litespeed
-    #set sql
-    set_mysql
 
 }
 
