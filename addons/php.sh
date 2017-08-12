@@ -9,9 +9,7 @@ centos_php(){
 #    check_version
     debug "=====================PHP INSTALL======================"
     debug "===================PHPVER=$PHPVER====================="
-    yum -y install lsphp$PHPVER lsphp$PHPVER-common lsphp$PHPVER-gd
-    lsphp$PHPVER-process lsphp$PHPVER-mbstring lsphp$PHPVER-xml
-    lsphp$PHPVER-mcrypt lsphp$PHPVER-pdo lsphp$PHPVER-imap
+    yum -y install lsphp$PHPVER lsphp$PHPVER-common lsphp$PHPVER-gd  lsphp$PHPVER-process lsphp$PHPVER-mbstring lsphp$PHPVER-xml  lsphp$PHPVER-mcrypt lsphp$PHPVER-pdo lsphp$PHPVER-imap
 
     #add soft link
     ln -sf $SERVER_DIR/lsphp$PHPVER/bin/lsphp $SERVER_DIR/fcgi-bin/lsphp5
