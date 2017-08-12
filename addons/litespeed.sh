@@ -14,7 +14,8 @@ check_version(){
               echo "You are already installed the last version of llsmp"
               debug "================================="
               while true; do
-              read "Do you wish to reinstall this program[y/n]?" yn
+              printf "Do you wish to reinstall this program[y/n]?" 
+              read yn
               case $yn in
                   [Yy]* ) ACTION=reinstall; break;;
                   [Nn]* ) exit;;
