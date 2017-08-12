@@ -3,6 +3,7 @@
 #centos sql install
 
 centos_database(){
+    debug "=======================OS_VERSION=$OS_VERSION============="
     if [[ "$OS_VERSION" == "6" ]]; then
         source ./addons/glibc-2.17_centos6.sh
     fi
