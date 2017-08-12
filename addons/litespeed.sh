@@ -11,10 +11,10 @@ check_version(){
     if [[ -d $SERVER_DIR ]]; then
 
         if [[ $last_version == `cat $SERVER_DIR/VERSION` ]]; then
-              echo "You already installed the last version of llsmp"
-              echo ""
+              echo "You are already installed the last version of llsmp"
+              debug "================================="
               while true; do
-              read -p "Do you wish to reinstall this program[y/n]?" yn
+              read "Do you wish to reinstall this program[y/n]?" yn
               case $yn in
                   [Yy]* ) ACTION=reinstall; break;;
                   [Nn]* ) exit;;
