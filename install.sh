@@ -188,8 +188,6 @@ check_os(){
                 exit
         esac
     fi
-    echogreen "OS name"
-    echored $OS
 }
 
 # output debug message
