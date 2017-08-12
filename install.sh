@@ -78,7 +78,7 @@ select_php(){
     6.    Install php-7.1
 EOF
     while true;do
-    read -p "Enter your choice number(Default 4 Pree Enter):" php
+    read -p "Enter your choice number(Default[4]Press Enter):" php
     case $php in
         1) PHPVER=53
             break;;
@@ -110,7 +110,7 @@ Please select a Version of Database Server:
     8.Not Install Database
 EOF
     while true;do
-    read -p "Enter your choice number(Default 3Pree Enter):" sql
+    read -p "Enter your choice number(Default[3] Press Enter):" sql
     case $sql in
         1) mysql=1
            mysql_ver=57

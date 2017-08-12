@@ -5,7 +5,6 @@
 centos_database(){
     debug "=======================SQL INSTALL START ================="
     debug "=======================mysql version=$mysql==============="   
-    check_version    
     yum -y install yum-utils
     if [[ "x$mysql" == "x1" ]]; then
         #download mysql yum repository
