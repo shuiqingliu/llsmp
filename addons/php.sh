@@ -3,16 +3,19 @@
 #install php for llsmp
 centos_php(){
     #include check action
-
+    
     current_dir="$(dirname "$0")"
     source ./addons/litespeed.sh
-    check_version
-    yum -y $ACTION lsphp$PHPVER lsphp$PHPVER-common lsphp$PHPVER-gd
+#    check_version
+    debug "=====================PHP INSTALL======================"
+    debug "===================PHPVER=$PHPVER====================="
+    yum -y install lsphp$PHPVER lsphp$PHPVER-common lsphp$PHPVER-gd
     lsphp$PHPVER-process lsphp$PHPVER-mbstring lsphp$PHPVER-xml
     lsphp$PHPVER-mcrypt lsphp$PHPVER-pdo lsphp$PHPVER-imap
 
     #add soft link
     ln -sf $SERVER_DIR/lsphp$PHPVER/bin/lsphp $SERVER_DIR/fcgi-bin/lsphp5
+    debug "==================PHP INSTALL FINISHED================"
 }
 
 debian_php(){

@@ -298,7 +298,6 @@ llsmp_install(){
        echored "we are not support the ubuntu distribution at present"    
        exit 
     elif [[ $OS == "centos" ]];then
-        variables
         centos_litespeed
         variables
         select_php

@@ -3,7 +3,8 @@
 #centos sql install
 
 centos_database(){
-    
+    debug "=======================SQL INSTALL START ================="
+    debug "=======================mysql version=$mysql==============="   
     check_version    
     yum -y install yum-utils
     if [[ "x$mysql" == "x1" ]]; then
@@ -21,6 +22,7 @@ centos_database(){
         fi
         #install mysql 
         yum -y install mysql-community-server
+        debug "=========================mysql install finished=========="
 
     elif [[ "x$MariaDB" == "x1" ]]; then
         if  [[ "x$MariaDB_ver" == "x102" ]]; then 
