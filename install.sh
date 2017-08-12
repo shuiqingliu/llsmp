@@ -254,7 +254,7 @@ set_litespeed(){
     
     #set password 
     read -p "Please Set LiteSpeed Administrator password(Default：llsmp.cn):" ADMINPASS
-    if [[ $ADMINPASS != "" ]];then
+    if [[ "x$ADMINPASS" == "x" ]];then
          generate_pass
          ADMINPASS=$TEMPPASS
     else
