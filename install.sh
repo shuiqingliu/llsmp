@@ -298,8 +298,13 @@ llsmp_install(){
        echored "we are not support the ubuntu distribution at present"    
        exit 
     elif [[ $OS == "centos" ]];then
+        variables
         centos_litespeed
+        variables
+        select_php
         centos_php
+        variables
+        select_sql
         centos_database
     fi
 }
@@ -318,9 +323,6 @@ do_main(){
     [[ $1 == llsmp ]] &&
         confirm_install
         #select php
-        select_php
-        #select sql
-        select_sql
         llsmp_install
     [[ $1 == lnmp ]] &&
        # lnmp_install  
