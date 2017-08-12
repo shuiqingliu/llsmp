@@ -6,6 +6,8 @@ centos_database(){
     debug "=======================SQL INSTALL START ================="
     debug "=======================mysql version=$mysql==============="   
     yum -y install yum-utils
+    yum -y install glibc.i686
+
     if [[ "x$mysql" == "x1" ]]; then
         #download mysql yum repository
         wget --no-check-certificate https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
