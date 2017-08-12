@@ -3,6 +3,9 @@
 #centos sql install
 
 centos_database(){
+    if [[ "$OS_VERSION" == "6" ]]; then
+        source ./addons/glibc-2.17_centos6.sh
+    fi
     debug "=======================SQL INSTALL START ================="
     debug "=======================mysql version=$mysql==============="   
     yum -y install yum-utils
