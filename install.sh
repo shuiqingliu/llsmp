@@ -240,7 +240,6 @@ set_mysql_pass(){
     done
 }
 set_mysql(){
-    echo "Your database　password is $DATABASEPASS" >> $SERVER_DIR/password
     if [[ "x$mysql" == "x1" || "x$MariaDB" == "x1" ]];then 
           #start mysql  
           service mysqld start
@@ -249,6 +248,7 @@ set_mysql(){
     #elif [[ "x$sqlite" == "x1" ]];then
           #start sqlite fi
     fi
+    echo "Your database password is \"$DATABASEPASS\"" >> $SERVER_DIR/password
 }
 
 set_litespeed_info(){
