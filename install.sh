@@ -240,7 +240,7 @@ set_mysql(){
     echo "Your database　password is $DATABASEPASS" >> $SERVER_DIR/password
     if [[ "x$mysql" == "x1" || "x$MariaDB" == "x1" ]];then 
           #start mysql    
-          service mysql start
+          service mysqld start
           #set mysql password
           mysqladmin -uroot password $TEMPPASS
     #elif [[ "x$sqlite" == "x1" ]];then
