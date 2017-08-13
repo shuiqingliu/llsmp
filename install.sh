@@ -243,12 +243,13 @@ set_mysql(){
     if [[ "x$mysql" == "x1" || "x$MariaDB" == "x1" ]];then 
           #start mysql  
           service mysqld start
+          echo "==================DB:$DATABASEPASS==================="
           mysqladmin -u root password '$DATABASEPASS'
           #set mysql password
     #elif [[ "x$sqlite" == "x1" ]];then
           #start sqlite fi
     fi
-    echo "Your database password is \"$DATABASEPASS\"" >> $SERVER_DIR/password
+    debug "Your database password is \"$DATABASEPASS\"" >> $SERVER_DIR/password
 }
 
 set_litespeed_info(){
