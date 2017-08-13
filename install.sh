@@ -243,13 +243,21 @@ set_mysql(){
     if [[ "x$mysql" == "x1" || "x$MariaDB" == "x1" ]];then 
           #start mysql  
           service mysqld start
-          echo "==================DB:$DATABASEPASS==================="
-          mysqladmin -u root password '$DATABASEPASS'
+          debug "==================DB:$DATABASEPASS==================="
+          mysql -uroot -e "update mysql.user set plugin='' where user='root';"
+          mysql -uroot -e "flush privileges;"
+          mysqladmin -uroot password $DATABASEPASS
+          if [ $? = 0 ] ; then
+                echo "Mysql root password set to $DATABASEPASS"
+          else
+             echo "DATABASE SET FAIL"
+          fi
+          debug "=================DB:pass set finish=================="
           #set mysql password
     #elif [[ "x$sqlite" == "x1" ]];then
           #start sqlite fi
     fi
-    debug "Your database password is \"$DATABASEPASS\"" >> $SERVER_DIR/password
+    echo "Your database password is \"$DATABASEPASS\"" >> $SERVER_DIR/password
 }
 
 set_litespeed_info(){
