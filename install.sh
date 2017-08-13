@@ -282,7 +282,7 @@ finish_msg(){
     echo "=================Install Finished==============="
     echo "=   The litespeed address:localhost:8088       ="
     echo "=   The litespeed admin:localhost:7080         ="
-    echo "=  Your password in file $SERVER_DIR/password  ="
+    echo "=   Password file $SERVER_DIR/password         ="
     echo "================================================"
 }
 
