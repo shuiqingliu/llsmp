@@ -225,7 +225,8 @@ generate_pass(){
 
 set_mysql_pass(){
     while true; do
-    read -p "Please Set the root password of database :" DBPASS 
+    printf  "Please Set the root password of database :" 
+    read  DBPASS 
     if [[ "x$DBPASS" != "x" ]];then
         DATABASEPASS=$DBPASS
         break
@@ -233,8 +234,8 @@ set_mysql_pass(){
         generate_pass
         DATABASEPASS=$TEMPPASS
         break
-    elif [[ ${#DBPASS} -le 8 ]];then
-        echored "The minimum password length of 8 character"
+    elif [[ ${#DBPASS} -le 6 ]];then
+        echored "The minimum password length of 6 character"
     fi
     done
 }
