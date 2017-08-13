@@ -241,9 +241,9 @@ set_mysql_pass(){
 set_mysql(){
     echo "Your database　password is $DATABASEPASS" >> $SERVER_DIR/password
     if [[ "x$mysql" == "x1" || "x$MariaDB" == "x1" ]];then 
-          #start mysql    
-          mysqladmin -uroot password $DATABASEPASS
+          #start mysql  
           service mysqld start
+          mysqladmin -u root password '$DATABASEPASS'
           #set mysql password
     #elif [[ "x$sqlite" == "x1" ]];then
           #start sqlite fi
