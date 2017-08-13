@@ -227,15 +227,15 @@ set_mysql_pass(){
     while true; do
     printf  "Please Set the root password of database :" 
     read  DBPASS 
-    if [[ "x$DBPASS" != "x" ]];then
-        DATABASEPASS=$DBPASS
-        break
-    elif [[ $DBPASS == 0 ]];then
+    if [[ "x$DBPASS" == "x" ]];then
         generate_pass
         DATABASEPASS=$TEMPPASS
         break
-    elif [[ ${#DBPASS} -le 6 ]];then
-        echored "The minimum password length of 6 character"
+    elif [[ ${#DBPASS} -ge 8 ]];then
+        DATABASEPASS=$DBPASS
+        break
+    else
+        echo "The minimum password length of 8 character"
     fi
     done
 }
