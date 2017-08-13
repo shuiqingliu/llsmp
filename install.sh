@@ -299,6 +299,7 @@ llsmp_install(){
         select_php
         centos_php
         variables
+        check_os
         select_sql
         centos_database
         #set litespeed

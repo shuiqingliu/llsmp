@@ -4,9 +4,6 @@
 
 centos_database(){
     debug "=======================OS_VERSION=$OS_VERSION============="
-    if [[ "$OS_VERSION" == "6" ]]; then
-        source ./addons/glibc-2.17_centos6.sh
-    fi
     debug "=======================SQL INSTALL START ================="
     debug "=======================mysql version=$mysql==============="   
     yum -y install yum-utils
@@ -14,10 +11,12 @@ centos_database(){
 
     if [[ "x$mysql" == "x1" ]]; then
         #download mysql yum repository
-        wget --no-check-certificate https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
-
-        #install and setting repository 
-        rpm -Uvh mysql57-community-release-el7-11.noarch.rpm
+        if [[ "$OS_VERSION" == "6" ]]; then
+            rpm -Uvh https://repo.mysql.com/mysql57-community-release-el6.rpm
+        elif [[ "$OS_VERSION" == "7" ]]; then
+            #install and setting repository 
+            rpm -Uvh https://repo.mysql.com/mysql57-community-release-el7.rpm
+        fi
         if [[ "x$mysql_ver" == "x56" ]];then
              yum-config-manager --disable mysql57-community
              yum-config-manager --enable mysql56-community 
