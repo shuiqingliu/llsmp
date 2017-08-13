@@ -223,7 +223,7 @@ generate_pass(){
     TEMPPASS=`dd if=/dev/urandom bs=1 count=32 2>/dev/null | base64 -w 0 | rev | cut -b 2- | rev`    
 }
 
-set_mysql(){
+set_mysql_pass(){
     while true; do
     read -p "Please Set the root password of database :" DBPASS 
     if [[ "x$DBPASS" != "x" ]];then
@@ -237,18 +237,20 @@ set_mysql(){
         echored "The minimum password length of 8 character"
     fi
     done
+}
+set_mysql(){
     echo "Your database　password is $DATABASEPASS" >> $SERVER_DIR/password
     if [[ "x$mysql" == "x1" || "x$MariaDB" == "x1" ]];then 
           #start mysql    
+          mysqladmin -uroot password $DATABASEPASS
           service mysqld start
           #set mysql password
-          mysqladmin -uroot password $TEMPPASS
     #elif [[ "x$sqlite" == "x1" ]];then
           #start sqlite fi
     fi
 }
 
-set_litespeed(){
+set_litespeed_info(){
     
     #set password 
     read -p "Please Set LiteSpeed Administrator password(Default：llsmp.cn):" ADMINPASS
@@ -257,7 +259,6 @@ set_litespeed(){
     else
         ADMINPASS=$ADMINPASS
     fi
-    echo "Your litespeed admin　password is $ADMINPASS" > $SERVER_DIR/password
     #set email
     while true; do
     read -p "Please Set LiteSpeed Administrator Email(Default：admin@localhost.com):" EMAIL
@@ -271,8 +272,14 @@ set_litespeed(){
         * ) echored "Please intput right email address.";;
     esac
     done
+}
+set_litespeed(){
+    chown -R lsadm:lsadm $SERVER_DIR/conf/
+    ENCRYPT_PASS=`"$SERVER_DIR/admin/fcgi-bin/admin_php" -q "$SERVER_DIR/admin/misc/htpasswd.php" $ADMINPASS`
+    echo "admin:$ENCRYPT_PASS" > "$SERVER_DIR/admin/conf/htpasswd"
     sed -i -e "s/adminEmails/adminEmails $EMAIL\n#adminEmails/" "$SERVER_DIR/conf/httpd_config.conf"        
 
+    echo "Your litespeed admin　password is $ADMINPASS" > $SERVER_DIR/password
     echo "Your litespeed email is $EMAIL" >> $SERVER_DIR/password
 }
 
@@ -290,6 +297,10 @@ finish_msg(){
 llsmp_install(){
     variables
     check_os
+    select_php
+    select_sql
+    set_litespeed_info
+    set_mysql_pass
     if [[ $OS == "debian" ]];then
        # debian_litespeed
        # debian_php
@@ -304,16 +315,9 @@ llsmp_install(){
        exit 
     elif [[ $OS == "centos" ]];then
         centos_litespeed
-        variables
-        select_php
         centos_php
-        variables
-        check_os
-        select_sql
         centos_database
-        #set litespeed
         set_litespeed
-        #set sql
         set_mysql
     fi
 }
