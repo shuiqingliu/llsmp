@@ -228,6 +228,7 @@ set_mysql_pass(){
     read  DBPASS 
     if [[ "x$DBPASS" == "x" ]];then
         generate_pass
+        TEMPPASS=`expr substr "$TEMPPASS" 1 8`
         DATABASEPASS=$TEMPPASS
         break
     elif [[ ${#DBPASS} -ge 8 ]];then
