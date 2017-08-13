@@ -277,6 +277,16 @@ set_litespeed(){
     echo "Your litespeed email is $EMAIL" >> $SERVER_DIR/password
 }
 
+#install finish
+finish_msg(){
+
+    echo "=================Install Finished==============="
+    echo "=   The litespeed address:localhost:8088       ="
+    echo "=   The litespeed admin:localhost:7080         ="
+    echo "=  Your password in file $SERVER_DIR/password  ="
+    echo "================================================"
+}
+
 # start istall 
 llsmp_install(){
     variables
@@ -324,6 +334,7 @@ do_main(){
         confirm_install
         #select php
         llsmp_install
+        finish_msg
     [[ $1 == lnmp ]] &&
        # lnmp_install  
        echored "we are not support the lnmp at present"    
