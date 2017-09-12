@@ -19,12 +19,23 @@ lsws(){
 }
 
 vhost(){
+    host_path="/home/www/"
+    domain_conf="$host_path/$"
+    if [[ ! -d $host_path ]];then
+        mkdir -p $host_path
+    fi
+
     local ACTION=$1
     if [[ "x$ACTION" == "xadd" ]];then
-        printf "Please input your site name:"
-        read site
-        if [[ -e  ]];then
-        fi
+        printf "Please input your domain name:"
+        read domain
+        domain_conf="$host_path/$domain/"
+        if [[ -d $domain_conf  ]];then
+                echo "The domain $domain  already exist"
+                exit
+        else 
+            mkdir -p $domain_conf
+        fi    
     fi
 }
 
