@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PARAM= 
+
 usage(){
     
     echo "USAGE :                $0 [optins] [optins]"
@@ -136,3 +138,128 @@ redis(){
 }
 
 usage
+
+check_parameter(){
+    PARAM=$1
+    local MSG=$2
+    local $PARAMCHAR=`echo $1 | awk '{print substr($0,1,1)}'`
+    if [[ "x$PARAMCHAR" = "x" ]];then
+            PARAM=
+    fi
+
+    if [[ "x$PARAM" = "x" ]];then
+            if [[ "x$MSG" != "x" ]];then
+                    echo "Error: '$PARAM' is not valid '$PARAM', please check and try again."
+                    usage
+                    exit 1
+            fi
+    fi
+}
+
+while [[ "$1" != "" ]];do
+        case $1 in
+            -i | --install )  check_parameter "$2" "install"
+                              if [[ "x$PARAM" != "x" ]];then
+                                    shift
+                              fi
+                              case $PARAM in
+                                  ioCube | iocube)  install_cube
+                                                    ;;
+                                  redis )           install_redis
+                                                    ;;
+                                  memcached )       install_memcached
+                                                    ;;
+                                  ftp )             install_ftp
+                                                    ;;
+                                  *)    echo "We don't support the $PARAM install now"
+                                        exit 0
+                                        ;;
+                               esac
+                               ;;
+             -r | --uninstall ) check_parameter "$2" "remove"
+                              if [[ "x$PARAM" != "x" ]];then
+                                    shift
+                              fi
+                              case $PARAM in
+                                  all)  rm_all
+                                                    ;;
+                                  php )  rm_php       
+                                                    ;;
+                                  mysql ) rm_mysql 
+                                                    ;;
+                                  litespeed) rm_lsws 
+                                                    ;;
+                                  *)    echo "Please check your input $PARAM not support now"
+                                        exit 0
+                                        ;;
+                               esac
+                               ;;
+                        vhost ) check_parameter "$2" "vhost"
+                               if [[ "x$PARAM" != "x" ]];then
+                                    shift
+                               fi
+                               case $PARAM in
+                                    add ) vhost add
+                                          ;;
+                                    del ) vhost del
+                                          ;;
+                                     * ) echo "Please check your input $PARAM "
+                                          exit 0
+                                          ;;
+                                 esac
+                                ;;
+                        lsws ) check_parameter "$2" "lsws"
+                               if [[ "x$PARAM" != "x" ]];then
+                                    shift
+                               fi
+                               case $PARAM in
+                                    start ) lsws start
+                                          ;;
+                                    restart ) lsws restart
+                                          ;;
+                                    stop  )   lsws stop
+                                          ;;       
+                                     * ) echo "Please check your input $PARAM "
+                                          exit 0
+                                          ;;
+                                 esac
+                                ;;
+                        mysql ) check_parameter "$2" "mysql"
+                               if [[ "x$PARAM" != "x" ]];then
+                                    shift
+                               fi
+                               case $PARAM in
+                                    start ) mysql start
+                                          ;;
+                                    restart ) mysql restart
+                                          ;;
+                                    stop  )   mysql stop
+                                          ;;       
+                                     * ) echo "Please check your input $PARAM "
+                                          exit 0
+                                          ;;
+                                 esac
+                                ;;
+
+                        pureftpd ) check_parameter "$2" "pureftpd"
+                               if [[ "x$PARAM" != "x" ]];then
+                                    shift
+                               fi
+                               case $PARAM in
+                                    start ) ftp start
+                                          ;;
+                                    restart ) ftp restart
+                                          ;;
+                                    stop  )   ftp stop
+                                          ;;       
+                                     * ) echo "Please check your input $PARAM "
+                                          exit 0
+                                          ;;
+                                 esac
+                                ;;
+                        * ) usage
+                            exit 0
+                            ;;
+            esac
+            shift
+    done        
