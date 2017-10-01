@@ -142,7 +142,7 @@ usage
 check_parameter(){
     PARAM=$1
     local MSG=$2
-    local $PARAMCHAR=`echo $1 | awk '{print substr($0,1,1)}'`
+    local PARAMCHAR=`echo $1 | awk '{print substr($0,1,1)}'`
     if [[ "x$PARAMCHAR" = "x" ]];then
             PARAM=
     fi
