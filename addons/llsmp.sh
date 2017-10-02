@@ -18,7 +18,7 @@ usage(){
     echo "USAGE:   $0 [optins] [optins]"
     echo "example: llsmp.sh  vhost add"
     echo "OPTIONS                                    "
-    echo "--install(-i)   [ioCube|redis|memcached|ftp...]  To install some feature componets."
+    echo "--install(-i)   [ionCube|redis|memcached|ftp...]  To install some feature componets."
     echo "--uninstall(-r) [all|php|mysql|litespeed]        To uninstall llsmp componets or remove it all."
     echo "vhost           [add|del]                        To add/remove vhost."
     echo "lsws            [start|restart|stop]             To manage litespeed."
@@ -33,6 +33,19 @@ install_ftp(){
       source ../tools/vsftpd_centos.sh
    else
       source ../tools/vsftpd_debian.sh
+   fi
+}
+
+install_cube(){
+   :
+}
+
+install_redis(){
+   if [[ "$OS" == "centos" ]];then
+      sudo yum -y install redis
+      
+   else
+      sudo apt-get -y install redis
    fi
 }
 
@@ -193,7 +206,7 @@ while [[ "$1" != "" ]];do
                                     shift
                               fi
                               case $PARAM in
-                                  ioCube | iocube)  install_cube
+                                  ionCube | ioncube)  install_cube
                                                     ;;
                                   redis )           install_redis
                                                     ;;
