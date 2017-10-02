@@ -1,6 +1,17 @@
 #!/bin/bash
 
 PARAM= 
+OS=
+
+source ../tools/function.sh
+check_os
+
+
+# Check if user is root
+if [ $(id -u) != "0" ]; then
+    echo "Error: You must be root to run this script."
+    exit 1
+fi
 
 usage(){
     
@@ -16,6 +27,14 @@ usage(){
 
 }
 #================component=================
+
+install_ftp(){
+   if [[ "$OS" == "centos" ]];then
+      source ../tools/vsftpd_centos.sh
+   else
+      source ../tools/vsftpd_debian.sh
+   fi
+}
 
 lsws(){
         :
@@ -138,15 +157,17 @@ redis(){
 :
 }
 
-
+#check the second argument 
 check_parameter(){
     PARAM=$1
     local MSG=$2
+    #output the first letter of second parameter 
     local PARAMCHAR=`echo $1 | awk '{print substr($0,1,1)}'`
     if [[ "x$PARAMCHAR" = "x" ]];then
             PARAM=
     fi
 
+    #check the second argument is empty or not
     if [[ "x$PARAM" = "x" ]];then
             if [[ "x$MSG" != "x" ]];then
                     echo "Error: the second argument is not correct , please check and try again."
@@ -155,6 +176,8 @@ check_parameter(){
             fi
     fi
 }
+
+#if the first argument is empty then echo usage for user
 if [[ "$1" == "" ]];then
     printf "Parameter error ,Please check your command\n"
     echo ""
@@ -162,6 +185,7 @@ if [[ "$1" == "" ]];then
     exit 0
 fi
 
+#repeat check all parameters and then select special action 
 while [[ "$1" != "" ]];do
         case $1 in
             -i | --install )  check_parameter "$2" "install"
