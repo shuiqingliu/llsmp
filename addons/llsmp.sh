@@ -4,7 +4,8 @@ PARAM=
 
 usage(){
     
-    echo "USAGE :                $0 [optins] [optins]"
+    echo "USAGE:   $0 [optins] [optins]"
+    echo "example: llsmp.sh  vhost add"
     echo "OPTIONS                                    "
     echo "--install(-i)   [ioCube|redis|memcached|ftp...]  To install some feature componets."
     echo "--uninstall(-r) [all|php|mysql|litespeed]        To uninstall llsmp componets or remove it all."
@@ -137,7 +138,6 @@ redis(){
 :
 }
 
-usage
 
 check_parameter(){
     PARAM=$1
@@ -149,12 +149,18 @@ check_parameter(){
 
     if [[ "x$PARAM" = "x" ]];then
             if [[ "x$MSG" != "x" ]];then
-                    echo "Error: '$PARAM' is not valid '$PARAM', please check and try again."
+                    echo "Error: the second argument is not correct , please check and try again."
                     usage
                     exit 1
             fi
     fi
 }
+if [[ "$1" == "" ]];then
+    printf "Parameter error ,Please check your command\n"
+    echo ""
+    usage
+    exit 0
+fi
 
 while [[ "$1" != "" ]];do
         case $1 in
@@ -174,8 +180,8 @@ while [[ "$1" != "" ]];do
                                   *)    echo "We don't support the $PARAM install now"
                                         exit 0
                                         ;;
-                               esac
-                               ;;
+                              esac
+                              ;;
              -r | --uninstall ) check_parameter "$2" "remove"
                               if [[ "x$PARAM" != "x" ]];then
                                     shift
@@ -192,13 +198,13 @@ while [[ "$1" != "" ]];do
                                   *)    echo "Please check your input $PARAM not support now"
                                         exit 0
                                         ;;
-                               esac
-                               ;;
+                              esac
+                              ;;
                         vhost ) check_parameter "$2" "vhost"
                                if [[ "x$PARAM" != "x" ]];then
                                     shift
                                fi
-                               case $PARAM in
+                              case $PARAM in
                                     add ) vhost add
                                           ;;
                                     del ) vhost del
@@ -206,8 +212,8 @@ while [[ "$1" != "" ]];do
                                      * ) echo "Please check your input $PARAM "
                                           exit 0
                                           ;;
-                                 esac
-                                ;;
+                              esac
+                              ;;
                         lsws ) check_parameter "$2" "lsws"
                                if [[ "x$PARAM" != "x" ]];then
                                     shift
@@ -222,7 +228,7 @@ while [[ "$1" != "" ]];do
                                      * ) echo "Please check your input $PARAM "
                                           exit 0
                                           ;;
-                                 esac
+                                esac
                                 ;;
                         mysql ) check_parameter "$2" "mysql"
                                if [[ "x$PARAM" != "x" ]];then
@@ -257,9 +263,11 @@ while [[ "$1" != "" ]];do
                                           ;;
                                  esac
                                 ;;
-                        * ) usage
+                        * ) printf "Parameter error ,Please check your command\n"
+                            echo ""
+                            usage
                             exit 0
                             ;;
-            esac
-            shift
+        esac
+        shift
     done        
