@@ -290,7 +290,9 @@ set_litespeed(){
     echo "admin:$ENCRYPT_PASS" > "$SERVER_DIR/admin/conf/htpasswd"
     sed -i -e "s/adminEmails/adminEmails $EMAIL\n#adminEmails/" "$SERVER_DIR/conf/httpd_config.conf"        
     #change default port
-    sed -i  "s/*:8088/*:80/" "$SERVER_DIR/conf/httpd_config.conf"        
+    sed -i  "s/*:8088/*:80/" "$SERVER_DIR/conf/httpd_config.conf" 
+    #when change the port we should restart the server
+    $SERVER_DIR/bin/lswsctrl restart       
 
     echo "Your litespeed admin　password is $ADMINPASS" > $SERVER_DIR/password
     echo "Your litespeed email is $EMAIL" >> $SERVER_DIR/password
