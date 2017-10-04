@@ -54,9 +54,9 @@ lsws(){
 }
 
 vhost(){
-    host_path="/home/www/"
+    host_path="/home/www"
     SERVER_DIR=/usr/local/lsws
-    domain_conf="$host_path/$"
+    domain_conf=
     if [[ ! -d $host_path ]];then
         mkdir -p $host_path
     fi
@@ -65,7 +65,7 @@ vhost(){
     if [[ "x$ACTION" == "xadd" ]];then
         printf "Please input your domain name:"
         read domain
-        domain_conf="$host_path/$domain/"
+        domain_conf="$host_path/$domain"
         if [[ -d $domain_conf  ]];then
                 echo "The domain $domain  already exist"
                 exit
@@ -82,7 +82,7 @@ vhost(){
                     mkdir -p $domain_conf
                     cat >> $SERVER_DIR/conf/httpd_config.conf <<END
 virtualhost $domain {
-vhRoot              $domain_conf
+vhRoot              $domain_conf/
 configFile          $vhostconf
 allowSymbolLink     1
 enableScript        1
@@ -124,14 +124,14 @@ END
 docRoot                   \$VH_ROOT/
 index  {
   useServer               0
-  indexFiles              index.php
+  indexFiles              index.php,index.html,index.htm
 }
 
 context / {
   type                    NULL
   location                \$VH_ROOT
   allowBrowse             1
-  indexFiles              index.php
+  indexFiles              index.php,index.html,index.htm
  
   rewrite  {
     enable                1
