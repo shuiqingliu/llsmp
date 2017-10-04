@@ -75,7 +75,7 @@ vhost(){
                 if [[ "x$port" == "x" ]];then
                   port=80
                 fi
-                cat $SERVER_DIR/conf/httpd_config.conf | grep $port >/dev/null
+                cat $SERVER_DIR/conf/httpd_config.conf | grep "*:$port" >/dev/null
                 if [[ $? != 0 ]];then
 
                     vhostconf=$SERVER_DIR/conf/vhosts/$domain/vhconf.conf    
