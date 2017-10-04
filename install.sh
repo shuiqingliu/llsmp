@@ -295,8 +295,18 @@ set_litespeed(){
 }
 
 phpmyadmin(){
-
-    if [[ "$sqlite" != "1" ]]; then
+    phpmyadmin=
+    while true; do
+    read -p "Do you want to install phpmyadmin?[y/n]" yn
+    case $yn in
+        [Yy]* ) phpmyadmin=yes
+                break;;
+        [Nn]* ) phpmyadmin=no
+                break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+    done
+    if [[ "$sqlite" != "1" || "$phpmyadmin" == "yes" ]]; then
         #install phpmyadmin
         cd $SERVER_DIR/Example/html
         wget https://files.phpmyadmin.net/phpMyAdmin/4.7.4/phpMyAdmin-4.7.4-all-languages.zip
