@@ -294,6 +294,17 @@ set_litespeed(){
     echo "Your litespeed email is $EMAIL" >> $SERVER_DIR/password
 }
 
+phpmyadmin(){
+
+    if [[ "$sqlite" != "1" ]]; then
+        #install phpmyadmin
+        cd $SERVER_DIR/Example/html
+        wget https://files.phpmyadmin.net/phpMyAdmin/4.7.4/phpMyAdmin-4.7.4-all-languages.zip
+        unzip phpMyAdmin-4.7.4-all-languages.zip
+        mv phpMyAdmin-4.7.4-all-languages phpmyadmin
+    fi
+
+}
 #install finish
 finish_msg(){
 
@@ -303,6 +314,7 @@ finish_msg(){
     echo "=   Password file $SERVER_DIR/password      ="
     echo "================================================"
 }
+
 
 # start istall 
 llsmp_install(){
@@ -330,6 +342,7 @@ llsmp_install(){
         centos_database
         set_litespeed
         set_mysql
+        phpmyadmin
     fi
 }
 #TODO ADD lnmp,lamp install function
