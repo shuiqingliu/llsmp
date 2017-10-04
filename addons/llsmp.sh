@@ -72,7 +72,7 @@ vhost(){
         else 
                 printf "Please input your site port(default:80):"
                 read port
-                if [[ "x$port" == "x"]];then
+                if [[ "x$port" == "x" ]];then
                   port=80
                 fi
                 cat $SERVER_DIR/conf/httpd_config.conf | grep $port >/dev/null

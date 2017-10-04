@@ -169,7 +169,7 @@ check_os(){
             fi
         fi
 
-        if [[ "x$ostemp"=="xcentos" ]]; then
+        if [[ "x$ostemp" == "xcentos" ]]; then
                 OS="centos"
         else 
                 error "unkown os : $(uname -m)"
@@ -193,7 +193,7 @@ check_os(){
 # output debug message
 debug(){
     info=$1
-    if [[ debug==true  ]]; then
+    if [[ "x$debug" == "xtrue"  ]]; then
         echo "$info" 1>&2
     fi
 }
@@ -239,6 +239,7 @@ set_mysql_pass(){
     fi
     done
 }
+
 set_mysql(){
     if [[ "x$mysql" == "x1" || "x$MariaDB" == "x1" ]];then 
           #start mysql  
