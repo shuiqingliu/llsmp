@@ -151,7 +151,36 @@ END
                         exit
                      fi    
 
-        fi    
+        fi 
+      elif [[ "x$ACTION" == "xdel" ]]; then
+           #statements   
+           printf "Please input the domain name that you want to delete:"
+           read deldomain
+           domain_path="$host_path/$deldomain"
+           if [[ -d $domain_path ]]; then
+             #statements
+                  while true; do
+                  read -p "Do you really want to delete the domain of $deldomain ?[y/n]" yn
+                  case $yn in
+                      [Yy]* ) break;;
+                      [Nn]* ) exit;;
+                      * ) echo "Please answer yes or no.";;
+                  esac
+                  done
+                  #do delete action
+                  #1,delete web folder
+                  #2,delete vhosts config
+                  #,delete the relevant content in http_conf
+                  rm -rf $domain_path
+                  rm -rf $SERVER_DIR/conf/vhosts/$deldomain
+                  sed -i -e '/virtualhost $deldomain {/,+35 s/^/#/' $SERVER_DIR/conf/httpd_config.conf
+                  #restart server
+                  $SERVER_DIR/bin/lswsctrl restart
+            elif 
+                echo "The domain of $deldomain not exist,please confirm your input."
+                exit 0
+           fi
+
     fi
 }
 
