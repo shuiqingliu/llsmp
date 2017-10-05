@@ -331,7 +331,7 @@ move_example(){
     #change Example setting
     sed -i "s|\$SERVER_ROOT/Example/|$default_dir|" $SERVER_DIR/conf/httpd_config.conf
     #change Example default index file
-    sed -i "s/index.html/index.html,index.php/" $SERVER_DIR/conf/Example/vhconf.conf
+    sed -i "s/index.html/index.html,index.php/" $SERVER_DIR/conf/vhosts/Example/vhconf.conf
     #restart openlitespeed
     $SERVER_DIR/bin/lswsctrl restart
 
