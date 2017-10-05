@@ -181,7 +181,7 @@ END
                   echo "===================================================="
                   echo "=    The domain fo $deldomain has been delete      ="
                   echo "===================================================="
-            elif 
+            else
                 echo "The domain of $deldomain not exist,please confirm your input."
                 exit 0
            fi
