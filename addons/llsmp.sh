@@ -70,13 +70,13 @@ vhost(){
                 echo "The domain $domain  already exist"
                 exit
         else 
-                printf "Please input your site port(default:80):"
-                read port
-                if [[ "x$port" == "x" ]];then
-                  port=80
-                fi
-                cat $SERVER_DIR/conf/httpd_config.conf | grep -w "*:$port" >/dev/null
-                if [[ $? != 0 ]];then
+                # printf "Please input your site port(default:80):"
+                # read port
+                # if [[ "x$port" == "x" ]];then
+                #   port=80
+                # fi
+                # cat $SERVER_DIR/conf/httpd_config.conf | grep -w "*:$port" >/dev/null
+                # if [[ $? != 0 ]];then
 
                     vhostconf=$SERVER_DIR/conf/vhosts/$domain/vhconf.conf    
                     mkdir -p $domain_conf
@@ -92,7 +92,7 @@ setUIDMode          2
 }
 
 listener $domain {
-address                 *:$port
+#address                 *:80
 secure                  0
 map            $domain   $domain
 }
@@ -146,10 +146,10 @@ END_rules
 END
                      chown -R lsadm:lsadm $SERVER_DIR/conf/
 
-                    else
-                        echo "Your input port already in use"
-                        exit
-                     fi    
+                    # else
+                    #     echo "Your input port already in use"
+                    #     exit
+                    #  fi    
 
         fi 
       elif [[ "x$ACTION" == "xdel" ]]; then

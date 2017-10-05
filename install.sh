@@ -322,11 +322,26 @@ phpmyadmin(){
     fi
 
 }
+
+move_example(){
+    default_dir=/home/wwwroot/default
+    mkdir -p $default_dir
+    # mv example folder
+    mv $SERVER_DIR/Example/* $default_dir
+    #change Example setting
+    sed -i "s|\$SERVER_ROOT/Example/|$default_dir|" $SERVER_DIR/conf/httpd_config.conf
+    #change Example default index file
+    sed -i "s/index.html/index.html,index.php/" $SERVER_DIR/conf/Example/vhconf.conf
+    #restart openlitespeed
+    $SERVER_DIR/bin/lswsctrl restart
+
+}
 #install finish
 finish_msg(){
 
     echo "=================Install Finished==============="
-    echo "=   The litespeed address:localhost:8088       ="
+    echo "=   The litespeed address:localhost            ="
+    echo "=   The phpmyadmin address:localhost/phpmyadmin="
     echo "=   The litespeed admin:localhost:7080         ="
     echo "=   Your litespeed admin　password is $ADMINPASS"
     echo "=   Your database password is \"$DATABASEPASS\""
@@ -364,6 +379,7 @@ llsmp_install(){
         set_litespeed
         set_mysql
         phpmyadmin
+        move_example
     fi
 }
 #TODO ADD lnmp,lamp install function
