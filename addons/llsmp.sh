@@ -176,6 +176,11 @@ END
                   sed -i -e '/virtualhost $deldomain {/,+35 s/^/#/' $SERVER_DIR/conf/httpd_config.conf
                   #restart server
                   $SERVER_DIR/bin/lswsctrl restart
+
+                  echo ""
+                  echo "===================================================="
+                  echo "=    The domain fo $deldomain has been delete      ="
+                  echo "===================================================="
             elif 
                 echo "The domain of $deldomain not exist,please confirm your input."
                 exit 0
