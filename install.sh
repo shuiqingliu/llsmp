@@ -34,6 +34,7 @@ variables(){
     PHPVER=
     OS_VERSION=
     OS_TYPE=`uname -m`
+    phpmyadmin=
 }
 
 change_sshPort(){
@@ -298,8 +299,7 @@ set_litespeed(){
     echo "Your litespeed email is $EMAIL" >> $SERVER_DIR/password
 }
 
-phpmyadmin(){
-    phpmyadmin=
+set_phpmyadmin(){
     while true; do
     read -p "Do you want to install phpmyadmin?[y/n]" yn
     case $yn in
@@ -310,6 +310,9 @@ phpmyadmin(){
         * ) echo "Please answer yes or no.";;
     esac
     done
+}
+phpmyadmin(){
+
     if [[ "$sqlite" != "1" || "$phpmyadmin" == "yes" ]]; then
         #install phpmyadmin
         cd $SERVER_DIR/Example/html
@@ -341,6 +344,7 @@ llsmp_install(){
     select_sql
     set_litespeed_info
     set_mysql_pass
+    set_phpmyadmin
     if [[ $OS == "debian" ]];then
        # debian_litespeed
        # debian_php
