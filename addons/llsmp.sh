@@ -164,7 +164,8 @@ END
                   #,delete the relevant content in http_conf
                   rm -rf $domain_path
                   rm -rf $SERVER_DIR/conf/vhosts/$deldomain
-                  sed -i -e '/virtualhost $deldomain {/,+35 s/^/#/' $SERVER_DIR/conf/httpd_config.conf
+                  sed -i -e "/map.*$deldomain/ s/^/#/" $SERVER_DIR/conf/httpd_config.conf
+                  sed -i -e '/virtualhost $deldomain {/,+29 s/^/#/' $SERVER_DIR/conf/httpd_config.conf
                   #restart server
                   $SERVER_DIR/bin/lswsctrl restart
 
