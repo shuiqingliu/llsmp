@@ -126,7 +126,7 @@ errorlog  {
 
 END
                 #change listener
-            replaceStr="$map                     domain $domain,www.$domain"
+            replaceStr="map                     $domain $domain,www.$domain"
             sed -i "/map.*Example */a \    $replaceStr" $SERVER_DIR/conf/httpd_config.conf
             echo "<?php phpinfo(); ?>" > $domain_conf/index.php
             chown -R lsadm:lsadm $SERVER_DIR/conf/
