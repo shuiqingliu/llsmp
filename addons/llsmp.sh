@@ -77,10 +77,9 @@ vhost(){
                 # fi
                 # cat $SERVER_DIR/conf/httpd_config.conf | grep -w "*:$port" >/dev/null
                 # if [[ $? != 0 ]];then
-
-                    vhostconf=$SERVER_DIR/conf/vhosts/$domain/vhconf.conf    
-                    mkdir -p $domain_conf
-                    cat >> $SERVER_DIR/conf/httpd_config.conf <<END
+            vhostconf=$SERVER_DIR/conf/vhosts/$domain/vhconf.conf    
+            mkdir -p $domain_conf
+cat >> $SERVER_DIR/conf/httpd_config.conf <<END
 virtualhost $domain {
     vhRoot              $domain_conf/
     configFile          $vhostconf
@@ -111,9 +110,9 @@ module cache {
     PARAMFLAG
 }
 END
-                #mkdir for domain
-                    mkdir -p $SERVER_DIR/conf/vhosts/$domain
-                    cat > $vhostconf << END
+            #mkdir for domain
+            mkdir -p $SERVER_DIR/conf/vhosts/$domain
+cat > $vhostconf << END
 docRoot                   \$VH_ROOT/
 vhDomain                  $domain
 vhAliases                 *.$domain
@@ -127,19 +126,16 @@ errorlog  {
 
 END
                 #change listener
-                sed -i "/map                     Example */a map                     $domain , www.$domain" $SERVER_DIR/conf/httpd_config.conf
-                cat >  $domain_conf/index.php << END
-<?php phpinfo(); ?>
-END                 
-                     chown -R lsadm:lsadm $SERVER_DIR/conf/
-
+            sed -i "/map                     Example */a map                     $domain , www.$domain" $SERVER_DIR/conf/httpd_config.conf
+            echo "<?php phpinfo(); ?>" > $domain_conf/index.php
+            chown -R lsadm:lsadm $SERVER_DIR/conf/
                     # else
                     #     echo "Your input port already in use"
                     #     exit
                     #  fi    
 
         fi 
-      elif [[ "x$ACTION" == "xdel" ]]; then
+    elif [[ "x$ACTION" == "xdel" ]]; then
            #statements   
            printf "Please input the domain name that you want to delete:"
            read deldomain
