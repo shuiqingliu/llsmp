@@ -134,6 +134,7 @@ END
             sed -i "/map.*Example */a \    $replaceStr" $SERVER_DIR/conf/httpd_config.conf
             echo "<?php phpinfo(); ?>" > $domain_conf/index.php
             chown -R lsadm:lsadm $SERVER_DIR/conf/
+            chown -R nobody:nobody $domain_conf
                     # else
                     #     echo "Your input port already in use"
                     #     exit
