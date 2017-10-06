@@ -137,9 +137,7 @@ END
             $SERVER_DIR/bin/lswsctrl restart 
 
             echo "================================================"       
-            echo "====                                       ====="       
-            echo "====     vhost $domain add  success        ====="       
-            echo "====                                       ====="       
+            echo "= vhost $domain add  success ====="       
             echo "================================================"       
 
         fi 
@@ -170,9 +168,9 @@ END
                   $SERVER_DIR/bin/lswsctrl restart
 
                   echo ""
-                  echo "===================================================="
-                  echo "=    The domain fo $deldomain has been delete      ="
-                  echo "===================================================="
+                  echo "========================================================="
+                  echo "= The domain fo $deldomain has been delete  ="
+                  echo "========================================================="
             else
                 echo "The domain of $deldomain not exist,please confirm your input."
                 exit 0
