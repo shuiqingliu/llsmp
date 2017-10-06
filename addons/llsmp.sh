@@ -126,13 +126,21 @@ errorlog  {
 
 END
                 #change listener
-            sed -i "/map                     Example */a map                     $domain , www.$domain" $SERVER_DIR/conf/httpd_config.conf
+            replaceStr="$map                     domain $domain,www.$domain"
+            sed -i "/map.*Example */a \    $replaceStr" $SERVER_DIR/conf/httpd_config.conf
             echo "<?php phpinfo(); ?>" > $domain_conf/index.php
             chown -R lsadm:lsadm $SERVER_DIR/conf/
                     # else
                     #     echo "Your input port already in use"
                     #     exit
                     #  fi    
+            $SERVER_DIR/bin/lswsctrl restart 
+
+            echo "================================================"       
+            echo "====                                       ====="       
+            echo "====     vhost $ domain add  success       ====="       
+            echo "====                                       ====="       
+            echo "================================================"       
 
         fi 
     elif [[ "x$ACTION" == "xdel" ]]; then
