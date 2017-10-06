@@ -124,6 +124,10 @@ errorlog  {
   logLevel                ERROR
 }
 
+htAccess {
+  accessFileName .htaccess
+  allowOverride 0
+}
 END
                 #change listener
             replaceStr="map                     $domain $domain,www.$domain"
