@@ -54,7 +54,7 @@ lsws(){
 }
 
 vhost(){
-    host_path="/home/www"
+    host_path="/home/wwwroot"
     SERVER_DIR=/usr/local/lsws
     domain_conf=
     if [[ ! -d $host_path ]];then
@@ -82,40 +82,40 @@ vhost(){
                     mkdir -p $domain_conf
                     cat >> $SERVER_DIR/conf/httpd_config.conf <<END
 virtualhost $domain {
-vhRoot              $domain_conf/
-configFile          $vhostconf
-allowSymbolLink     1
-enableScript        1
-restrained          0
-setUIDMode          2
+    vhRoot              $domain_conf/
+    configFile          $vhostconf
+    allowSymbolLink     1
+    enableScript        1
+    restrained          0
+    setUIDMode          2
 
 }
 
 listener $domain {
-#address                 *:80
-secure                  0
-map            $domain   $domain
+    #address                 *:80
+    secure                  0
+    map            $domain   $domain
 }
 
 
 module cache {
-param <<<PARAMFLAG
+    param <<<PARAMFLAG
 
-enableCache         0
-qsCache             1
-reqCookieCache      1
-respCookieCache     1
-ignoreReqCacheCtrl  1
-ignoreRespCacheCtrl 0
-expireInSeconds     3600
-maxStaleAge         200
-enablePrivateCache  0
-privateExpireInSeconds 3600                      
-checkPrivateCache   1
-checkPublicCache    1
-maxCacheObjSize     10000000
+    enableCache         0
+    qsCache             1
+    reqCookieCache      1
+    respCookieCache     1
+    ignoreReqCacheCtrl  1
+    ignoreRespCacheCtrl 0
+    expireInSeconds     3600
+    maxStaleAge         200
+    enablePrivateCache  0
+    privateExpireInSeconds 3600                      
+    checkPrivateCache   1
+    checkPublicCache    1
+    maxCacheObjSize     10000000
 
-PARAMFLAG
+    PARAMFLAG
 }
 END
                 #mkdir for domain
