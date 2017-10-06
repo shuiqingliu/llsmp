@@ -86,17 +86,10 @@ virtualhost $domain {
     configFile          $vhostconf
     allowSymbolLink     1
     enableScript        1
-    restrained          0
-    setUIDMode          2
+    restrained          1
+    setUIDMode          0
 
 }
-
-listener $domain {
-    #address                 *:80
-    secure                  0
-    map            $domain   $domain
-}
-
 
 module cache {
     param <<<PARAMFLAG
@@ -122,28 +115,22 @@ END
                     mkdir -p $SERVER_DIR/conf/vhosts/$domain
                     cat > $vhostconf << END
 docRoot                   \$VH_ROOT/
-index  {
-  useServer               0
-  indexFiles              index.php,index.html,index.htm
+vhDomain                  $domain
+vhAliases                 *.$domain
+enableGzip                1
+enableIpGeo               1
+
+errorlog  {
+  useServer               1
+  logLevel                ERROR
 }
 
-context / {
-  type                    NULL
-  location                \$VH_ROOT
-  allowBrowse             1
-  indexFiles              index.php,index.html,index.htm
- 
-  rewrite  {
-    enable                1
-    inherit               1
-    rules                 <<<END_rules
-    rewriteFile           $domain_conf/.htaccess
-
-END_rules
-
-  }
-}
 END
+                #change listener
+                sed -i "/map                     Example */a map                     $domain , www.$domain" $SERVER_DIR/conf/httpd_config.conf
+                cat >  $domain_conf/index.php << END
+<?php phpinfo(); ?>
+END                 
                      chown -R lsadm:lsadm $SERVER_DIR/conf/
 
                     # else
