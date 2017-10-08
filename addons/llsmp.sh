@@ -148,7 +148,14 @@ END
         fi 
     elif [[ "x$ACTION" == "xdel" ]]; then
            #statements   
-           printf "Please input the domain name that you want to delete:"
+           domain_list=`ls /home/wwwroot`
+           domain_split=
+           for word in $domain_list
+           do 
+              domain_split="$word;$domain_split"
+           done
+           echo "domain list is : $domain_split"
+           printf "Please select the domain name that you want to delete:"
            read deldomain
            domain_path="$host_path/$deldomain"
            if [[ -d $domain_path ]]; then
