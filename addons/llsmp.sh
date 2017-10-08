@@ -133,7 +133,7 @@ rewrite  {
     enable                1       
     inherit               1       
     rules                 <<<END_rules        
-    rewriteFile           \$VH_ROOT/.htaccess           
+    rewriteFile           $domain_conf/.htaccess           
     END_rules     
        
 }  
