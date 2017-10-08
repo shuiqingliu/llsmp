@@ -126,8 +126,19 @@ errorlog  {
 
 htAccess {
   accessFileName .htaccess
-  allowOverride 0
+  allowOverride 1
 }
+
+rewrite  {      
+    enable                1       
+    inherit               1       
+    rules                 <<<END_rules        
+    rewriteFile           \$VH_ROOT/.htaccess           
+    END_rules     
+       
+}  
+
+
 END
                 #change listener
             replaceStr="map                     $domain $domain,www.$domain"
